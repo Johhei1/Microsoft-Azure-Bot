@@ -1,0 +1,39 @@
+{
+  "Version": 1,
+  "Hash": "actZgefhRj3ZxDq3js7fBcinN1lQ9onDZfTqgG3faYY=",
+  "Source": "EchoBot1",
+  "BasePath": "_content/EchoBot1",
+  "Mode": "Default",
+  "ManifestType": "Publish",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "EchoBot1\\wwwroot",
+      "Source": "EchoBot1",
+      "ContentRoot": "C:\\Users\\ikosti\\Projects\\EchoBot1\\EchoBot1\\wwwroot\\",
+      "BasePath": "_content/EchoBot1",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "C:\\Users\\ikosti\\Projects\\EchoBot1\\EchoBot1\\wwwroot\\default.htm",
+      "SourceId": "EchoBot1",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\ikosti\\Projects\\EchoBot1\\EchoBot1\\wwwroot\\",
+      "BasePath": "_content/EchoBot1",
+      "RelativePath": "default.htm",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\default.htm"
+    }
+  ]
+}
