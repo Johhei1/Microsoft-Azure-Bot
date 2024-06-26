@@ -11,6 +11,10 @@ using Microsoft.Bot.Connector.Authentication;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Azure.Storage.Blobs;
+using EchoBot1.Bots;
+using System.IO;
+
 
 namespace EchoBot1
 {
@@ -31,14 +35,34 @@ namespace EchoBot1
                 options.SerializerSettings.MaxDepth = HttpHelper.BotMessageSerializerSettings.MaxDepth;
             });
 
+            // Register BlobStorageService
+            services.AddScoped<BlobStorageService>();
+            services.AddScoped<SearchService>();
+
             // Create the Bot Framework Authentication to be used with the Bot Adapter.
             services.AddSingleton<BotFrameworkAuthentication, ConfigurationBotFrameworkAuthentication>();
 
             // Create the Bot Adapter with error handling enabled.
             services.AddSingleton<IBotFrameworkHttpAdapter, AdapterWithErrorHandler>();
 
-            // Create the bot as a transient. In this case the ASP Controller is expecting an IBot.
-            services.AddTransient<IBot, Bots.EchoBot>();
+            services.AddTransient<EchoBot>();
+            services.AddTransient<IBot, EchoBot>(); // Register the bot as transient
+
+            // Register a factory for creating the bot instances
+            services.AddTransient<IBot>(provider =>
+            {
+                return provider.GetRequiredService<EchoBot>();
+            });
+
+            services.AddBot<EchoBot>(options =>
+            {
+                var storage = new MemoryStorage();
+                var conversationState = new ConversationState(storage);
+                options.State.Add(conversationState);
+            });
+
+            services.AddMvc(option => option.EnableEndpointRouting = false);
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -52,6 +76,8 @@ namespace EchoBot1
             app.UseDefaultFiles()
                 .UseStaticFiles()
                 .UseWebSockets()
+                .UseNamedPipes(System.Environment.GetEnvironmentVariable("APPSETTING_WEBSITE_SITE_NAME") + ".directline")
+                .UseMvc()
                 .UseRouting()
                 .UseAuthorization()
                 .UseEndpoints(endpoints =>
