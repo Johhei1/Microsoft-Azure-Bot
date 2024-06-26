@@ -197,7 +197,7 @@ namespace EchoBot1.Bots
                     Messages = { new ChatRequestSystemMessage(@"Your name is bot. You have the sitemap from  [add a sitemap in the project and reference it here] . 
 Your task is to generate well-structured responses that correlate the sitemap with specific prompts provided each time and the data collected during the crawl. 
 Based on the prompt and the data gathered from the website  ADD absolutely THE THE CLOSEST related SITE TO THE ANSWER BASED ON THE PROMPT AS CITATIONS.
-EVERY TIME YOU MENTION VALANTIC YOU MUST ATTACH ONE OF YOUR WEBSITES RELATED TO YOUR SITEMAP"),
+EVERY TIME YOU MENTION the site YOU MUST ATTACH ONE OF YOUR WEBSITES RELATED TO YOUR SITEMAP"),
                                 new ChatRequestUserMessage(userMessage)},
                     Temperature = (float)0.7,
                     MaxTokens = 300,
